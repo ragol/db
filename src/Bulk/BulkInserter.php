@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Bulk;
 
 /**
@@ -12,7 +10,7 @@ class BulkInserter extends BulkOperator
     /**
      * @inheritdoc
      */
-    protected function getQuery(int $numRecords) : string
+    protected function getQuery($numRecords)
     {
         $fields       = implode(', ', $this->fields);
         $placeholders = implode(', ', array_fill(0, $this->numFields, '?'));

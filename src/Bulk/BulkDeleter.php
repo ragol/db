@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Bulk;
 
 /**
@@ -12,7 +10,7 @@ class BulkDeleter extends BulkOperator
     /**
      * @inheritdoc
      */
-    protected function getQuery(int $numRecords) : string
+    protected function getQuery($numRecords)
     {
         $parts = [];
 

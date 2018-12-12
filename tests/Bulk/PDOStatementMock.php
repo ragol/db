@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Tests\Bulk;
 
 /**
@@ -23,7 +21,7 @@ class PDOStatementMock extends \PDOStatement
      * @param PDOMock $pdo
      * @param int     $number
      */
-    public function __construct(PDOMock $pdo, int $number)
+    public function __construct(PDOMock $pdo, $number)
     {
         $this->pdo    = $pdo;
         $this->number = $number;
@@ -54,7 +52,7 @@ class PDOStatementMock extends \PDOStatement
      *
      * @return string
      */
-    private function dump(array $parameters) : string
+    private function dump(array $parameters)
     {
         foreach ($parameters as & $parameter) {
             $parameter = var_export($parameter, true);

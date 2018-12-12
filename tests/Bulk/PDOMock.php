@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Tests\Bulk;
 
 /**
@@ -36,12 +34,12 @@ class PDOMock extends \PDO
     }
 
     /**
-     * @param string     $statement
-     * @param array|null $options
+     * @param string $statement
+     * @param array $driver_options
      *
      * @return PDOStatementMock
      */
-    public function prepare($statement, $options = null)
+    public function prepare($statement, array $driver_options = array())
     {
         $statementNumber = ++$this->statementNumber;
 
@@ -55,7 +53,7 @@ class PDOMock extends \PDO
      *
      * @return void
      */
-    public function log(string $info) : void
+    public function log($info)
     {
         $this->log[] = $info;
     }
@@ -63,7 +61,7 @@ class PDOMock extends \PDO
     /**
      * @return string[]
      */
-    public function getLog() : array
+    public function getLog()
     {
         return $this->log;
     }
@@ -73,10 +71,10 @@ class PDOMock extends \PDO
      *
      * @return int
      */
-    public function getRowCount() : int
+    public function getRowCount()
     {
         $rowCount = array_shift($this->rowCounts);
 
-        return $rowCount ?? 0;
+        return (int)$rowCount;
     }
 }

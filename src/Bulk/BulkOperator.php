@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Bulk;
 
 /**
@@ -89,7 +87,7 @@ abstract class BulkOperator
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(\PDO $pdo, string $table, array $fields, int $operationsPerQuery = 100)
+    public function __construct(\PDO $pdo, $table, array $fields, $operationsPerQuery = 100)
     {
         if ($operationsPerQuery < 1) {
             throw new \InvalidArgumentException('The number of operations per query must be 1 or more.');
@@ -122,7 +120,7 @@ abstract class BulkOperator
      *
      * @throws \InvalidArgumentException If the number of values does not match the field count.
      */
-    public function queue(...$values) : bool
+    public function queue(...$values)
     {
         $count = count($values);
 
@@ -165,7 +163,7 @@ abstract class BulkOperator
      *
      * @return void
      */
-    public function flush() : void
+    public function flush()
     {
         if ($this->bufferSize === 0) {
             return;
@@ -187,7 +185,7 @@ abstract class BulkOperator
      *
      * @return void
      */
-    public function reset() : void
+    public function reset()
     {
         $this->buffer = [];
         $this->bufferSize = 0;
@@ -202,7 +200,7 @@ abstract class BulkOperator
      *
      * @return int
      */
-    public function getTotalOperations() : int
+    public function getTotalOperations()
     {
         return $this->totalOperations;
     }
@@ -212,7 +210,7 @@ abstract class BulkOperator
      *
      * @return int
      */
-    public function getFlushedOperations() : int
+    public function getFlushedOperations()
     {
         return $this->totalOperations - $this->bufferSize;
     }
@@ -222,7 +220,7 @@ abstract class BulkOperator
      *
      * @return int
      */
-    public function getPendingOperations() : int
+    public function getPendingOperations()
     {
         return $this->bufferSize;
     }
@@ -234,7 +232,7 @@ abstract class BulkOperator
      *
      * @return int
      */
-    public function getAffectedRows() : int
+    public function getAffectedRows()
     {
         return $this->affectedRows;
     }
@@ -244,5 +242,5 @@ abstract class BulkOperator
      *
      * @return string
      */
-    abstract protected function getQuery(int $numRecords) : string;
+    abstract protected function getQuery($numRecords);
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Brick\Db\Tests\Bulk;
 
 use Brick\Db\Bulk\BulkInserter;
@@ -66,7 +64,7 @@ class BulkInserterTest extends TestCase
         $flushedOperations = 0;
         $totalOperations = 0;
 
-        foreach ($data as [$parameters, $isFlush, $rowCount]) {
+        foreach ($data as list($parameters, $isFlush, $rowCount)) {
             $result = $inserter->queue(...$parameters);
             $totalOperations++;
             $pendingOperations++;
